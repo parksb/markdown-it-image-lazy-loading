@@ -14,6 +14,12 @@ function lazy_loading_plugin(md, mdOptions) {
 
     if (mdOptions && mdOptions.base_path && mdOptions.image_size === true) {
       const imgSrc = token.attrGet('src');
+
+      const imgExt = path.extname(imgSrc);
+      if (imgExt === '.mp4') {
+        return defaultImageRenderer(tokens, idx, options, env, self);
+      }
+
       const imgPath = path.join(mdOptions.base_path, imgSrc);
       const dimensions = imageSize(imgPath);
 
@@ -26,4 +32,3 @@ function lazy_loading_plugin(md, mdOptions) {
 };
 
 export default lazy_loading_plugin;
-

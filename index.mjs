@@ -26,6 +26,11 @@ function lazy_loading_plugin(md, mdOptions) {
       const imgPath = path.join(mdOptions.base_path, imgSrc);
       const dimensions = imageSize(imgPath);
 
+      if (dimensions.width > 800) {
+        dimensions.height = Math.round(dimensions.height * (800 / dimensions.width));
+        dimensions.width = 800;
+      }
+
       token.attrSet('width', dimensions.width);
       token.attrSet('height', dimensions.height);
     }
